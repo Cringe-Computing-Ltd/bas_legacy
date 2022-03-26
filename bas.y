@@ -176,7 +176,7 @@ instruction
 	}
 	
 	*bookmark = (Bookmark) {
-		.ic = codegen->ic,
+		.ic = codegen->ic + codegen->offset,
 		.name = codegen->_word,
 	};
 	codegen->_word = NULL;

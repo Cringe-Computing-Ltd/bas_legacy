@@ -171,7 +171,7 @@ codegen_gen(Codegen *codegen, FILE *file)
 				fprintf(stderr, "no such label %s\n", current->bookmark_name);
 				exit(0);
 			}
-			imm = bookmark->ic + codegen->offset;
+			imm = bookmark->ic;
 		} else
 			imm = current->imm;
 
