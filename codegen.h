@@ -73,6 +73,7 @@ void instruction_destroy(Instruction *instruction);
 
 typedef struct codegen {
 	uint16_t ic;
+	uint16_t offset;
 
 	uint8_t reg;
 	

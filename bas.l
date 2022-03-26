@@ -48,6 +48,8 @@ rf return RF;
 rg return RG;
 rh return RH;
 
+.offset return OFFSET;
+
 [a-zA-Z_][a-zA-Z_0-9]* return WORD;
 [0-9]+ { sscanf(yytext, "%d", &yylval); return NUM; }
 , return COMA;

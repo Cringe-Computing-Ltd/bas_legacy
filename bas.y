@@ -14,6 +14,8 @@
 %token RA RB RC RD RE RF RG RH
 %token LDI STR LDR ADD SUB MUL JMP JEQ JNE JGT JGE JLT JLE JCF XCG XOR AND OR CMP STI SHL SHR MOV INC DEC PSH POP DBG
 
+%token OFFSET
+
 %%
 
 code
@@ -180,6 +182,13 @@ instruction
 	codegen->_word = NULL;
 
 	codegen_bookmark_append(codegen, bookmark);
+ }
+| option
+;
+
+option
+: OFFSET NUM {
+	codegen->offset = atoi(yytext);
  }
 ;
 

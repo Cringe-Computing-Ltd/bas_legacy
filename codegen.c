@@ -152,7 +152,7 @@ codegen_gen(Codegen *codegen, FILE *file)
 				printf("bruh\n");
 				exit(0);
 			}
-			imm = bookmark->ic;
+			imm = bookmark->ic + codegen->offset;
 		} else
 			imm = current->imm;
 
