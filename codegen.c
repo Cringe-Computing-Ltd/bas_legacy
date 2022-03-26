@@ -168,7 +168,7 @@ codegen_gen(Codegen *codegen, FILE *file)
 		if (current->has_imm == 2) {
 			Bookmark *bookmark = codegen_bookmark_find(codegen, current->bookmark_name);
 			if (!bookmark) {
-				printf("bruh\n");
+				fprintf(stderr, "no such label %s\n", current->bookmark_name);
 				exit(0);
 			}
 			imm = bookmark->ic + codegen->offset;
