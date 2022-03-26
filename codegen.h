@@ -92,7 +92,9 @@ typedef struct codegen {
 } Codegen;
 
 void codegen_init(Codegen *codegen);
+Codegen *codegen_create(void);
 void codegen_drop(Codegen *codegen);
+void codegen_destroy(Codegen *codegen);
 
 void codegen_commit(Codegen *codegen);
 

@@ -13,19 +13,16 @@ main(int argc, char **argv)
 {
 	progname = argv[0];
 
-	codegen = malloc(sizeof(Codegen));
+	codegen = codegen_create();
 	if (!codegen)
 		return 1;
-	
-	codegen_init(codegen);
 	
 	yyparse();
 
 
 	codegen_gen(codegen, stdout);
 	
-	codegen_drop(codegen);
-	free(codegen);
+	codegen_destroy(codegen);
 }
 
 void

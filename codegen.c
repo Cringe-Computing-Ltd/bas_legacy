@@ -39,6 +39,18 @@ codegen_init(Codegen *codegen)
 	*codegen = (Codegen) {};
 }
 
+Codegen *
+codegen_create()
+{
+	Codegen *codegen = malloc(sizeof(Codegen));
+	if (!codegen)
+		return NULL;
+
+	codegen_init(codegen);
+
+	return codegen;
+}
+
 void
 codegen_drop(Codegen *codegen)
 {
@@ -47,6 +59,13 @@ codegen_drop(Codegen *codegen)
 
 	if (codegen->_word)
 		free(codegen->_word);
+}
+
+void
+codegen_destroy(Codegen *codegen)
+{
+	codegen_drop(codegen);
+	free(codegen);
 }
 
 void
