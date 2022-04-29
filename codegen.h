@@ -43,6 +43,7 @@
 #define CG_PSHI 19
 #define CG_POP 20
 #define CG_DBG 21
+#define CG_HLT 21
 
 typedef struct bookmark {
 	char *name;

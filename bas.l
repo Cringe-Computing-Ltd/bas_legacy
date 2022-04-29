@@ -38,6 +38,7 @@ dec return DEC;
 psh return PSH;
 pop return POP;
 dbg return DBG;
+hlt return HLT;
 
 ra return RA;
 rb return RB;
@@ -49,9 +50,11 @@ rg return RG;
 rh return RH;
 
 .offset return OFFSET;
+.org return OFFSET;
 
 [a-zA-Z_][a-zA-Z_0-9]* return WORD;
 [0-9]+ { sscanf(yytext, "%d", &yylval); return NUM; }
+0x[0-9A-Za-z]+ { sscanf(yytext, "%x", &yylval); return NUM; }
 , return COMA;
 : return COLON;
 %%

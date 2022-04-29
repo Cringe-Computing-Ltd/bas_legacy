@@ -156,10 +156,15 @@ codegen_gen(Codegen *codegen, FILE *file)
 	Instruction *current = codegen->i_head;
 	int fd = fileno(file);
 
+	// temporary hack to emit c++
+	unsigned ab = codegen->offset;
+
 	for (Instruction *current = codegen->i_head; current; current = current->next) {
 		uint16_t code;
 		code = current->opcode | current->dst << 6 | current->src << 11;
-		write(fd, &code, sizeof(code));
+		printf("debug::poke(0x%x, 0x%x);\n", ab, code);
+		ab++;
+		//write(fd, &code, sizeof(code));
 
 		if (!current->has_imm)
 			continue;
@@ -175,6 +180,8 @@ codegen_gen(Codegen *codegen, FILE *file)
 		} else
 			imm = current->imm;
 
-		write(fd, &imm, sizeof(imm));
+		printf("debug::poke(0x%x, 0x%x);\n", ab, imm);
+		//write(fd, &imm, sizeof(imm));
+		ab++;
 	}
 }

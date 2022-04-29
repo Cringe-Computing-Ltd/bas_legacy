@@ -12,7 +12,7 @@
 %locations
 %token WORD NUM COMA COLON
 %token RA RB RC RD RE RF RG RH
-%token LDI STR LDR ADD SUB MUL JMP JEQ JNE JGT JGE JLT JLE JCF XCG XOR AND OR CMP STI SHL SHR MOV INC DEC PSH POP DBG
+%token LDI STR LDR ADD SUB MUL JMP JEQ JNE JGT JGE JLT JLE JCF XCG XOR AND OR CMP STI SHL SHR MOV INC DEC PSH POP DBG HLT
 
 %token OFFSET
 
@@ -44,7 +44,7 @@ src
 imm
 : NUM {
 	codegen->bubble.has_imm = 1;
-	codegen->bubble.imm = atoi(yytext);
+	codegen->bubble.imm = yyval;
  }
 | WORD {
 	codegen->bubble.has_imm = 2;
@@ -133,7 +133,7 @@ instruction0
 | CMP dst COMA src {
 	codegen->bubble.opcode = CG_CMP;
  }
-| STI dst COMA imm {
+| STI imm COMA dst {
 	codegen->bubble.opcode = CG_STI;
  }
 | SHL dst COMA src {
@@ -159,6 +159,9 @@ instruction0
  }
 | POP dst {
 	codegen->bubble.opcode = CG_POP;
+ }
+| HLT {
+	codegen->bubble.opcode = CG_HLT;
  }
 | DBG {
 	codegen->bubble.opcode = CG_DBG;

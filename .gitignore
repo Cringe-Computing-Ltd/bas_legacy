@@ -3,5 +3,5 @@ bas
 lex.yy.c
 y.tab.*
 
-prog.bas
+*.bas
 out.bin
