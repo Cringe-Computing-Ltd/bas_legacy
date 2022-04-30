@@ -11,8 +11,8 @@
 
 %locations
 %token WORD NUM COMA COLON
-%token RA RB RC RD RE RF RG RH
-%token LDI STR LDR ADD SUB MUL JMP JEQ JNE JGT JGE JLT JLE JCF XCG XOR AND OR CMP STI SHL SHR MOV INC DEC PSH POP DBG HLT
+%token R0 R1 R2 R3 R4 R5 R6 R7
+%token MVI MVR XCG LDR STI STR ADD SUB CMP MUL INC DEC XOR AND OR SHL SHR JMP JEQ JNE JGE JGT JLE JLT JCF PSI PSH POP HLT MOV
 
 %token OFFSET
 
@@ -23,14 +23,14 @@ code
 ;
 
 reg
-: RA { codegen->reg = CG_RA; }
-| RB { codegen->reg = CG_RB; }
-| RC { codegen->reg = CG_RC; }
-| RD { codegen->reg = CG_RD; }
-| RE { codegen->reg = CG_RE; }
-| RF { codegen->reg = CG_RF; }
-| RG { codegen->reg = CG_RG; }
-| RH { codegen->reg = CG_RH; }
+: R0 { codegen->reg = CG_R0; }
+| R1 { codegen->reg = CG_R1; }
+| R2 { codegen->reg = CG_R2; }
+| R3 { codegen->reg = CG_R3; }
+| R4 { codegen->reg = CG_R4; }
+| R5 { codegen->reg = CG_R5; }
+| R6 { codegen->reg = CG_R6; }
+| R7 { codegen->reg = CG_R7; }
 ;
 
 dst
@@ -39,6 +39,12 @@ dst
 
 src
 : reg { codegen->bubble.src = codegen->reg; }
+;
+
+dimm
+: NUM {
+	codegen->bubble.src = yyval;
+ }
 ;
 
 imm
@@ -97,14 +103,29 @@ jmpinsts
 ;
 
 instruction0
-: LDI dst COMA imm {
-	codegen->bubble.opcode = CG_LDI;
+: MVI dst COMA imm {
+	codegen->bubble.opcode = CG_MVI;
  }
-| STR dst COMA src {
-	codegen->bubble.opcode = CG_STR;
+| MVR dst COMA src {
+	codegen->bubble.opcode = CG_MVR;
+ }
+| MOV dst COMA src {
+	codegen->bubble.opcode = CG_MVR;
+ }
+| MOV dst COMA imm {
+	codegen->bubble.opcode = CG_MVI;
+ }
+| XCG dst COMA src {
+	codegen->bubble.opcode = CG_XCG;
  }
 | LDR dst COMA src {
 	codegen->bubble.opcode = CG_LDR;
+ }
+| STI dst COMA imm {
+	codegen->bubble.opcode = CG_STI;
+ }
+| STR dst COMA src {
+	codegen->bubble.opcode = CG_STR;
  }
 | ADD dst COMA src {
 	codegen->bubble.opcode = CG_ADD;
@@ -112,38 +133,11 @@ instruction0
 | SUB dst COMA src {
 	codegen->bubble.opcode = CG_SUB;
  }
-| MUL dst COMA src {
-	codegen->bubble.opcode = CG_MUL;
- }
-| jmpinsts {
-	codegen->bubble.opcode = CG_JMP;
- }
-| XCG dst COMA src {
-	codegen->bubble.opcode = CG_XCG;
- }
-| XOR dst COMA src {
-	codegen->bubble.opcode = CG_XOR;
- }
-| AND dst COMA src {
-	codegen->bubble.opcode = CG_AND;
- }
-| OR  dst COMA src {
-	codegen->bubble.opcode = CG_OR;
- }
 | CMP dst COMA src {
 	codegen->bubble.opcode = CG_CMP;
  }
-| STI imm COMA dst {
-	codegen->bubble.opcode = CG_STI;
- }
-| SHL dst COMA src {
-	codegen->bubble.opcode = CG_SHL;
- }
-| SHR dst COMA src {
-	codegen->bubble.opcode = CG_SHR;
- }
-| MOV dst COMA src {
-	codegen->bubble.opcode = CG_MOV;
+| MUL dst COMA src {
+	codegen->bubble.opcode = CG_MUL;
  }
 | INC dst {
 	codegen->bubble.opcode = CG_INC;
@@ -151,20 +145,38 @@ instruction0
 | DEC dst {
 	codegen->bubble.opcode = CG_DEC;
  }
+| XOR dst COMA src {
+	codegen->bubble.opcode = CG_XOR;
+ }
+| AND  dst COMA src {
+	codegen->bubble.opcode = CG_AND;
+ }
+| OR dst COMA src {
+	codegen->bubble.opcode = CG_OR;
+ }
+| SHL dst COMA dimm {
+	codegen->bubble.opcode = CG_SHL;
+ }
+| SHR dst COMA dimm {
+	codegen->bubble.opcode = CG_SHR;
+ }
+| jmpinsts {
+	codegen->bubble.opcode = CG_JMP;
+ }
+| PSI imm {
+	codegen->bubble.opcode = CG_PSI;
+ }
 | PSH dst {
 	codegen->bubble.opcode = CG_PSH;
  }
 | PSH imm {
-	codegen->bubble.opcode = CG_PSHI;
+	codegen->bubble.opcode = CG_PSI;
  }
 | POP dst {
 	codegen->bubble.opcode = CG_POP;
  }
 | HLT {
 	codegen->bubble.opcode = CG_HLT;
- }
-| DBG {
-	codegen->bubble.opcode = CG_DBG;
  }
 ;
 

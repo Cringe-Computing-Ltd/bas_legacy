@@ -5,44 +5,36 @@
 #include <stdio.h>
 
 
-#define CG_RA 0
-#define CG_RB 1
-#define CG_RC 2
-#define CG_RD 3
-#define CG_RE 4
-#define CG_RF 5
-#define CG_RG 6
-#define CG_RH 7
+#define CG_R0 0
+#define CG_R1 1
+#define CG_R2 2
+#define CG_R3 3
+#define CG_R4 4
+#define CG_R5 5
+#define CG_R6 6
+#define CG_R7 7
 
-#define CG_LDI 0
-#define CG_STR 1
-#define CG_LDR 2
-#define CG_ADD 3
-#define CG_SUB 4
-#define CG_MUL 5
-#define CG_JMP 6
-#define CG_JEQ 6
-#define CG_JNE 6
-#define CG_JGT 6
-#define CG_JGE 6
-#define CG_JLT 6
-#define CG_JLE 6
-#define CG_JCF 6
-#define CG_XCG 7
-#define CG_XOR 8
-#define CG_AND 9
-#define CG_OR  10
-#define CG_CMP 11
-#define CG_STI 12
-#define CG_SHL 13
-#define CG_SHR 14
-#define CG_MOV 15
-#define CG_INC 16
-#define CG_DEC 17
-#define CG_PSH 18
-#define CG_PSHI 19
+#define CG_MVI 0
+#define CG_MVR 1
+#define CG_XCG 2
+#define CG_LDR 3
+#define CG_STI 4
+#define CG_STR 5
+#define CG_ADD 6
+#define CG_SUB 7
+#define CG_CMP 8
+#define CG_MUL 9
+#define CG_INC 10
+#define CG_DEC 11
+#define CG_XOR 12
+#define CG_AND 13
+#define CG_OR 14
+#define CG_SHL 15
+#define CG_SHR 16
+#define CG_JMP 17
+#define CG_PSI 18
+#define CG_PSH 19
 #define CG_POP 20
-#define CG_DBG 21
 #define CG_HLT 21
 
 typedef struct bookmark {

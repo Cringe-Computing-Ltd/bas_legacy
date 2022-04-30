@@ -10,44 +10,46 @@
 
 [ \r\n]* { continue; }
 
-ldi return LDI;
-str return STR;
+mvi return MVI;
+mvr return MVR;
+xcg return XCG;
 ldr return LDR;
+sti return STI;
+str return STR;
 add return ADD;
 sub return SUB;
+cmp return CMP;
 mul return MUL;
+inc return INC;
+dec return DEC;
+xor return XOR;
+and return AND;
+or return OR;
+shl return SHL;
+shr return SHR;
 jmp return JMP;
 jeq return JEQ;
 jne return JNE;
-jgt return JGT;
 jge return JGE;
-jlt return JLT;
+jgt return JGT;
 jle return JLE;
+jlt return JLT;
 jcf return JCF;
-xcg return XCG;
-xor return XOR;
-and return AND;
-or  return OR;
-cmp return CMP;
-sti return STI;
-shl return SHL;
-shr return SHR;
-mov return MOV;
-inc return INC;
-dec return DEC;
+psi return PSI;
 psh return PSH;
 pop return POP;
-dbg return DBG;
 hlt return HLT;
 
-ra return RA;
-rb return RB;
-rc return RC;
-rd return RD;
-re return RE;
-rf return RF;
-rg return RG;
-rh return RH;
+mov return MOV;
+
+r0 return R0;
+r1 return R1;
+r2 return R2;
+r3 return R3;
+r4 return R4;
+r5 return R5;
+r6 return R6;
+r7 return R7;
 
 .offset return OFFSET;
 .org return OFFSET;
